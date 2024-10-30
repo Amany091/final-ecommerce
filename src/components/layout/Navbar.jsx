@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Button from "../ui/Button";
 import { LuLogIn } from "react-icons/lu";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useGetUserQuery } from "../../redux/RTK/loginApi";
+import { useGetUserQuery, useLoginMutation } from "../../redux/RTK/loginApi";
 import { useCountOrdersQuery } from "../../redux/RTK/adminDashboardApi";
 import { useLogoutMutation } from "../../redux/RTK/logoutApi";
 import { ToastSuccess } from "../ui/Toast";
@@ -34,10 +34,7 @@ function Navbar() {
   const { theme } = useSelector((state) => state.theme)
   const dispatch = useDispatch()
 
-  const switchTheme = theme === "dark" ? 'text-black' : ''
-
-  const isLogged = !!localStorage.getItem("role") 
-  const { data: user } = useGetUserQuery()
+  const role = localStorage.getItem("role") 
   const { data: total } = useCountOrdersQuery()
   const [logout] = useLogoutMutation()
   
@@ -123,7 +120,7 @@ function Navbar() {
           </li>
           <li><NavLink to="/products">Products</NavLink></li>
           <li><NavLink to="/offer">Best Offers</NavLink></li>
-          {user?.role === "admin" && <li><NavLink to="/admin">Dasboard</NavLink></li>}
+          {role == "admin" && <li><NavLink to="/admin">Dasboard</NavLink></li> }
           {/* <li><NavLink to="/">Brands</NavLink></li> */}
         </ul>
         {/* End Links */}
@@ -147,10 +144,10 @@ function Navbar() {
             <span className="absolute top-[-15px] left-[10px] w-[20px] h-[20px] flex justify-center items-center text-sm p-3 text-white rounded-full bg-red-700">{total?.orderCount}</span>
           </span>
           {
-            isLogged ? <span className="cursor-pointer relative dark:text-white" onClick={handleLoginDropdown} ref={loginDropdownRef}  >
+            !!role ? <span className="cursor-pointer relative dark:text-white" onClick={handleLoginDropdown} ref={loginDropdownRef}  >
               <FaRegCircleUser className="text-[22px]" />
               <ul className={loginDropdownStatus ? "show-dropdown flex flex-col py-3 px-2 bg-white absolute w-[150px] shadow-custom rounded-md z-10" : "hidden"} style={{ top: 'calc(100% + 15px)', right: 'calc(-100%)' }}>
-                <li className="px-2 py-2  hover:bg-headerBackground duration-300 dark:text-black "><Link to="/">Account</Link></li>
+                <li className="px-2 py-2  hover:bg-headerBackground duration-300 dark:text-black "><Link to="/profile">Account</Link></li>
                 <li className="px-2 py-2  hover:bg-headerBackground duration-300 dark:text-black"><Link to="/orders">Orders</Link></li>
                 <li className="px-2 py-2  hover:bg-headerBackground duration-300 border-b border-headerBackground dark:text-black"><Link to="/">Address</Link></li>
                 <li className="px-2 py-2 hover:bg-headerBackground duration-300 text-discountColor" onClick={()=> handleLogout()} >logout</li>

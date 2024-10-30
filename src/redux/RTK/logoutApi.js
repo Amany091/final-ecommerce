@@ -9,6 +9,7 @@ export const logoutApi = createApi({
       query: () => ({
         url: "auth/logout",
         method: "POST",
+        credentials: "include",
       }),
     }),
     transformResponse: (response) => response.data,

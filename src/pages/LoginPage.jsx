@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import {  useState } from "react";
-import { useLoginMutation } from "../redux/RTK/loginApi";
+import { useGetUserQuery, useLoginMutation } from "../redux/RTK/loginApi";
 import { toast } from "react-toastify";
 import { ToastSuccess } from "../components/ui/Toast";
 import { useSelector } from "react-redux";
@@ -15,16 +15,17 @@ function LoginPage() {
 
   const { theme } = useSelector((state) => state.theme)
   const navigate = useNavigate();
-  const [login, {isLoading , isSuccess}] = useLoginMutation()
-
+  const [login, { isLoading, isSuccess, data: user }] = useLoginMutation()
+  
+  
   const handleClickShowPassword = (e) => {
     setShowPassword(!showPassword)
   }
-
+  
   const handleLogin = async (data) => {
     try {
       const result = await login({ data }).unwrap() // return promise
-      const { role } = result
+      const { role } = result.user
       localStorage.setItem('role', role)
       ToastSuccess("User added successfully")      
       navigate('/')

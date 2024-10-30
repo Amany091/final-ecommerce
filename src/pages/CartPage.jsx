@@ -15,7 +15,7 @@ const CartPage = () => {
   });
   
   const [getOrder, {data: currentOrder}] = useGetOrderMutation({
-    fixedCacheKey: "getOrder",
+    // fixedCacheKey: "getOrder",
   })
 
   const [deleteOrder] = useDeleteOrderMutation()
@@ -26,11 +26,11 @@ const CartPage = () => {
 
   const handleDeleteOrder = async (id) => {
     const newOrders = orders?.filter((order) => order.id !== id)
-    setUpdatedOrders(newOrders)
     try {
       await deleteOrder(id).unwrap()
       setShowModal(false)
       refetch()
+      setUpdatedOrders(newOrders)
       refetchCount()
     } catch (error) {
       console.log("Error occurred", error)
@@ -43,9 +43,9 @@ const CartPage = () => {
     getOrder(id).unwrap()
   }
 
-  useEffect(() => {
-    refetch()
-  }, [])
+  // useEffect(() => {
+  //   refetch()
+  // }, [])
 
   useEffect(() => {
    if(isSuccess) setUpdatedOrders(orders)

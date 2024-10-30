@@ -9,13 +9,13 @@ const AccordionUI = ({ title, children }) => {
     
     return (
         <Accordion
-            sx={{ boxShadow: 'none', backgroundColor: theme === "dark" ? 'transparent' : "", color: theme === "dark" ? "white" : ''}}>
+            sx={{ boxShadow: 'none', backgroundColor: theme === "dark" ? 'transparent' : "", color: theme === "dark" ? "white" : 'black'}}>
             <AccordionSummary
                 expandIcon={<ArrowDropDownIcon className='dark:text-white' />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
-                <p className="text-xl font-bold">{title}</p>
+                <p className="text-xl font-bold dark:text-white">{title}</p>
             </AccordionSummary>
             <AccordionDetails>
                 {children}

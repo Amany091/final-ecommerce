@@ -11,6 +11,7 @@ export const loginApi = createApi({
                 url: "auth/login",
                 method: "POST",
                 body: data,
+                credentials: "include",
             }),
             invalidatesTags: ["login"],
             transformResponse: (response, meta, arg) => response.data,
@@ -18,9 +19,13 @@ export const loginApi = createApi({
         }),
 
         getUser: builder.query({
-            query: () =>{ return "auth/currentUser"},
+            query: () => ({
+                url: "auth/currentUser",
+                method: "GET",
+                credentials: "include",
+            }),
             transformResponse: (response) => response.data,
-            transformErrorResponse: (response) => response.status,
+            transformErrorResponse: (response) => response.data,
         })
     })
 })

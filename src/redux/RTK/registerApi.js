@@ -10,6 +10,7 @@ export const registerApi = createApi({
                 url: "auth/signup",
                 method: "POST",
                 body: data,
+                credentials: "include",
             }),
             invalidatesTags: ["register"],
             transformResponse: (response, meta, arg) => response.data,

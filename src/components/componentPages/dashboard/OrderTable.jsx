@@ -2,9 +2,21 @@ import { useState } from 'react';
 import { FaCheckCircle, FaRegEye } from 'react-icons/fa'
 import { TiDelete } from "react-icons/ti";
 import LoaderSpinner from '../../ui/LoaderSpinner';
+import { Oval } from 'react-loader-spinner';
+import { useSelector } from 'react-redux';
 
-const OrderTable = ({ orders, completed, searchResult, onChangeOrderStatus, onSearchOrder, onDeleteOrder, isDirty, isLoading }) => {
+const OrderTable = ({ orders, completed, searchResult, onChangeOrderStatus, onSearchOrder, onDeleteOrder, isDirty, isLoading, loading }) => {
+
+  const [orderId, setOrderId] = useState(null)
+  const {theme} = useSelector((store)=> store.theme)
   
+  const handleChangeOrderStatus = (id, status) => {
+    setOrderId(id)
+    onChangeOrderStatus(id, status).finally(() => {
+      setOrderId(null)
+    })
+  }
+
   return (
     <div className="overflow-x-auto">
       <h2 className='text-2xl font-bold mb-4'>All orders</h2>
@@ -37,17 +49,19 @@ const OrderTable = ({ orders, completed, searchResult, onChangeOrderStatus, onSe
           </tr>
         </thead>
         <tbody>
-          {isLoading ? <LoaderSpinner/> : (searchResult.length > 0 ? searchResult : orders)?.map(order => (
+          {isLoading ? <LoaderSpinner/> : (searchResult.length > 0 ? searchResult : orders)?.map((order,index) => (
             <tr key={order.id} className="border-b border-slate-100 text-center">
-              <td className="px-4 py-4">
+              <td className="h-[100px] flex items-center justify-center gap-3">
+                {loading && orderId === order.id && <Oval height={20} width={20} color={theme === "dark" ? "white" : "black"} /> }
                 <input
                   type="checkbox"
                   checked={order.status === "complete"}
                   disabled={order.status === 'canceled'}
-                  className="h-5 w-5 border-2 border-gray-500 rounded dark:text-black"
-                  onClick={() => onChangeOrderStatus(order.id, "complete")}
+                  className="h-5 w-5 border-2 border-gray-500 rounded dark:text-black inline"
+                  onClick={() => handleChangeOrderStatus(order.id, "complete")}
                   readOnly
                 />
+                
               </td>
               <td className="px-6 py-6 text-sm md:text-base">{order.number}</td>
               <td className="px-6 py-6 text-sm md:text-base  sm:table-cell">{order.orderDate}</td>

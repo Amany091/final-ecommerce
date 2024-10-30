@@ -5,13 +5,13 @@ import { memo } from "react";
 function Card({ imageSrc, imageAlt, cardTitle,price, priceAfterDiscount, className, rate }) {
   return (
     <div >
-      <div className="flex flex-col">
-        <div className="w-full">
+      <div className="flex flex-col items-center ">
+        <div className="">
           <img
             src={imageSrc}
             alt={imageAlt}
             loading="lazy"
-            className={`rounded-cardRadius max-w-full w-full select-none object-contain max-h-[100%]`}
+            className={`rounded-cardRadius max-w-full  max-h-[100%]`}
           />
         </div>
         <h3 className="text-cardTitle font-cairo font-bold py-2 lg:text-xl text-base ">

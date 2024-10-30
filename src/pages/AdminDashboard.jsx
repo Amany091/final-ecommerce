@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     let queryParams = { currentPage: Number(currentPage), limit: limit }
 
     const { data: total } = useCountOrdersQuery()
-    const [setStatus, { data }] = useChangeOrderStatusMutation()
+    const [setStatus, { data , isLoading:loading}] = useChangeOrderStatusMutation()
     const { data: orders, refetch, isLoading, isSuccess } = useGetOrdersQuery(queryParams, {
         // skip: !shouldFetch,
         refetchOnMountOrArgChange: true,
@@ -65,11 +65,11 @@ const AdminDashboard = () => {
     const handleChangeOrderStatus = async (id, status) => {
         let newStatus = { status: status }
         const updatedOrder = orders?.map((order) => order.id === id ? { ...order, status: newStatus.status } : order)
-        setUpdatedOrders(updatedOrder)
         try {
             await setStatus({ id, status: newStatus }).unwrap()
             setShouldFetch(true)
             refetch()
+            setUpdatedOrders(updatedOrder)
         } catch (error) {
             console.log("Failed to update order status")
         }
@@ -97,9 +97,10 @@ const AdminDashboard = () => {
 
     const handleDeleteOrder = async (id) => {
         const newOrders = orders?.filter((order) => order.id !== id)
-        setUpdatedOrders(newOrders)
         try {
             await deleteOrder(id).unwrap()
+            refetch()
+            setUpdatedOrders(newOrders)
             
         } catch (error) {
             console.log("Failed to delete order")
@@ -129,6 +130,7 @@ const AdminDashboard = () => {
                         onDeleteOrder={handleDeleteOrder}
                         isDirty={isDirty}
                         isLoading={isLoading}
+                        loading={loading}
                     />
                     <Pagination
                         currentPage={Number(currentPage)}

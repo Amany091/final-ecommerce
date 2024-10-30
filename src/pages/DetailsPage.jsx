@@ -43,7 +43,7 @@ const DetailsPage = () => {
             All Reviews <span className="text-descriptionColor">(451)</span>{" "}
           </h5>
           <div className="flex gap-1">
-            <button className=" bg-inputBackground w-[120px] lg:p-quantityLg lg:flex hidden  items-center gap-2 font-bold rounded-[62px]">
+            <button className=" bg-inputBackground w-[120px] lg:p-quantityLg lg:flex hidden  items-center gap-2 font-bold rounded-[62px] dark:text-black">
               Latest <IoIosArrowDown />{" "}
             </button>
             <button className=" rounded-buttonRadius lg:p-quantityLg p-quantitySm bg-buttonBackground text-buttonColor">

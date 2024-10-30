@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage";
 import { Provider, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
 import UserOrders from "./pages/UserOrders";
 import AdminDashboard from "./pages/AdminDashboard";
 import BestOffers from "./pages/BestOffers";
@@ -71,6 +72,7 @@ function App() {
                     <BestOffers />
                 }
               />
+              <Route  path="/profile" element={<ProfilePage />}/>
             </Route>
           </Routes>
         </Router>

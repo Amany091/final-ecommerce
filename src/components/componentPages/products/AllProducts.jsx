@@ -16,7 +16,6 @@ function AllProducts({ ...props }) {
   const [activePageNumber, setActivePageNumber] = useState(1);
   const [numOfPage, setNumOfPage] = useState([0, 4]);
   const filterRef = useRef(null);
-  // const { data: products } = useGetProductsQuery()
   const windowWidth = useWindowWidth();
   const numOfPages = Math.ceil(products?.length / 4);
   const pageNums = [];
@@ -38,7 +37,6 @@ function AllProducts({ ...props }) {
     if (activePageNumber === 1) {
       let result = [0, 4];
       setNumOfPage(result);
-      // dispatch(getProducts());
     }
     else {
       const end = (activePageNumber + activePageNumber) * 2;
@@ -91,7 +89,7 @@ function AllProducts({ ...props }) {
                 selectedColor={selectedColor}
                 setSelectedSize={setSelectedSize}
                 selectedSize={selectedSize}
-                className='lg:hidden md:hidden overflow-y-auto block bg-white'
+                className='lg:hidden md:hidden overflow-y-auto block bg-white dark:text-black'
                 onFilterClick={onFilterClick} />
             </div>
           </div>
