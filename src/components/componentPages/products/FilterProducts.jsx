@@ -67,7 +67,7 @@ const FilterProducts = ({ ... props}) => {
                 />
             </AccordionUI>
            
-            <button className={'p-buttonPadding bg-buttonBackground border-[2px] border-buttonBackground hover:bg-transparent hover:text-inherit hover:border-[2px] hover:border-gray-300  text-white rounded-buttonRadius duration-200 font-inter w-full my-5'}
+            <button className={'p-buttonPadding bg-black border-[2px] border-buttonBackground hover:bg-transparent hover:text-inherit hover:border-[2px] hover:border-gray-300  text-white rounded-buttonRadius duration-200 font-inter w-full my-5'}
                 onClick={onFilterClick}>Apply Filter</button>
         </div >
     )

@@ -80,7 +80,7 @@ function AllProducts({ ...props }) {
           onFilterClick={onFilterClick} />
         {
           isFilterOpen &&
-          <div className="fixed w-full rounded top-0 left-0 bg-black/50 z-40 flex items-center justify-center">
+          <div className="fixed w-full rounded top-0 left-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center">
             <div ref={filterRef} className="w-[80%] max-w-[350px] relative top-5 ">
               <FilterProducts
                 selectedCategory={selectedCategory}
@@ -89,7 +89,7 @@ function AllProducts({ ...props }) {
                 selectedColor={selectedColor}
                 setSelectedSize={setSelectedSize}
                 selectedSize={selectedSize}
-                className='lg:hidden md:hidden overflow-y-auto block bg-white dark:text-black'
+                className='lg:hidden md:hidden overflow-y-auto block bg-dark max-h-screen scroll-smooth scroll-m-0 '
                 onFilterClick={onFilterClick} />
             </div>
           </div>

@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import UserOrders from "./pages/UserOrders";
 import AdminDashboard from "./pages/AdminDashboard";
+import NotFound from "./pages/NotFound";
 import BestOffers from "./pages/BestOffers";
 import ProtectedRouting from "./authorization/ProtectedRouting";
 import DetailsPage from "./pages/DetailsPage";
@@ -31,48 +32,17 @@ function App() {
             <Route path="/" element={<Layout />}>
               {/* pages */}
               <Route index element={<HomePage />} />
-              <Route
-                path="/products"
-                element={
-                    <ProductsPage />
-                }
-              />
+              <Route path="/products" element={ <ProductsPage />}/>
               <Route path="/products/:id" element={<DetailsPage />} />
-
               <Route path="/category/:id" element={<CategoryPage />} />
-              <Route
-                path="/orders"
-                element={
-                  <ProtectedRouting>
-                    <UserOrders />
-                  </ProtectedRouting>
-                }
-              />
-              <Route
-                path="/cart"
-                element={
-                  <ProtectedRouting>
-                    <CartPage />
-                  </ProtectedRouting>
-                }
-              />
+              <Route path="/orders" element={ <ProtectedRouting> <UserOrders /></ProtectedRouting>}/>
+              <Route path="/cart" element={<ProtectedRouting> <CartPage /> </ProtectedRouting>}/>
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRouting>
-                    <AdminDashboard />
-                  </ProtectedRouting>
-                }
-              />
-              <Route
-                path="/offer"
-                element={
-                    <BestOffers />
-                }
-              />
-              <Route  path="/profile" element={<ProfilePage />}/>
+              <Route path="/admin" element={<ProtectedRouting> <AdminDashboard /></ProtectedRouting>} />
+              <Route path="/offer" element={ <BestOffers /> } />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </Router>

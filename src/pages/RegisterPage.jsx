@@ -9,11 +9,16 @@ import { useRegisterMutation } from '../redux/RTK/registerApi'
 import { ToastError, ToastSuccess } from '../components/ui/Toast'
 import LoaderSpinner from '../components/ui/LoaderSpinner'
 import { useSelector } from 'react-redux'
+import { FcGoogle } from "react-icons/fc";
+import { useRegisterWithGoogleMutation } from '../redux/RTK/registerApi'
 
 const RegisterPage = () => {
 
   const {theme} = useSelector((state)=> state.theme)
   const [register, { data, isSuccess, isLoading }] = useRegisterMutation()
+  const [registerWithGoogle, {data: info}] = useRegisterWithGoogleMutation()
+  console.log(info)
+
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
 
@@ -36,6 +41,10 @@ const RegisterPage = () => {
     }
      
 
+  }
+
+  const handleRegisterWithGoogle =  () => {
+    window.open( import.meta.env.VITE_GOOGLE , "_self")
   }
 
   const formik = useFormik({
@@ -113,6 +122,9 @@ const RegisterPage = () => {
           <span className="flex justify-center gap-2 mt-3 text-center text-[15px]">
             <span className='text-placeholderColor'>Already have an account?</span>
             <Link className="underline decoration-2 text-bold text-[16px] dark:text-black" to={"/login"}>Sign In</Link>
+          </span>
+          <span onClick={()=> handleRegisterWithGoogle()} className='text-black flex gap-2 items-center justify-center my-3 cursor-pointer' >
+            <p >Add an account with Google </p> <FcGoogle />
           </span>
           <span className="block mt-2 text-center text-placeholderColor text-[13px]">
             By creating an account you agree to our <a href="#" className="text-blue-600" >Terms of Use</a> and <a href="#" className="text-blue-600" >Privacy Policy</a>.

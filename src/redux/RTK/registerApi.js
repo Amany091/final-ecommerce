@@ -16,7 +16,17 @@ export const registerApi = createApi({
             transformResponse: (response, meta, arg) => response.data,
             transformErrorResponse: (response, meta, arg) => response.data,
         }),
+        registerWithGoogle: build.mutation({
+            query: () => ({
+                url: "auth/google",
+                method: "GET",
+                credentials: "include",
+                mode: "no-cors"
+            }),
+            transformResponse: (response, meta, arg) => response.data,
+            transformErrorResponse: (response, meta, arg) => response.data,
+        }),
     }),
 })
 
-export const {useRegisterMutation} = registerApi
+export const {useRegisterMutation, useRegisterWithGoogleMutation } = registerApi

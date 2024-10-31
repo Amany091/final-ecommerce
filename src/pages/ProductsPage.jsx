@@ -39,21 +39,21 @@ const ProductsPage = () => {
 
         // Update the URL with the selected filters using setSearchParams
         setSearchParams(queryParams)
-        if (isFilterOpen) {
-            setIsFilterOpen(false);
-        } else {
-            return
-        }
+        // if (isFilterOpen) {
+        //     setIsFilterOpen(false);
+        // } else {
+        //     return
+        // }
     }
     
-    useEffect(() => {
-        setShouldFetch(true)
-    }, [])
+    // useEffect(() => {
+    //     setShouldFetch(true)
+    // }, [])
     
     useEffect(() => {
         // controle of filtering data 
-        if (isSuccess) setShouldFetch(false)
-    },[isSuccess])
+        setShouldFetch(false)
+    },[isSuccess, queryParams])
 
     return (
         <section>
