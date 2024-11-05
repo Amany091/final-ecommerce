@@ -25,7 +25,7 @@ const ProductDetails = ({ product }) => {
   async function handleAddToCart() {
     const quantity = Number(count)
     try {
-      await addToCart({ count: quantity, productId: product?._id, userId: "670e2e1d58277efbe52cabd1" }).unwrap()
+      await addToCart({ count: quantity, productId: product?._id, userId: user?._id }).unwrap()
       if (!isUserExist) {
         ToastError("You Must Login Before Add To Your Cart") 
       } else { 
@@ -33,7 +33,7 @@ const ProductDetails = ({ product }) => {
         refetchCount()
       }
     } catch (error) {
-      console.log(error?.errors[0].msg)
+      ToastError(error?.errors[0].msg  + "\nPlease Sign In First") 
     }
   }
 

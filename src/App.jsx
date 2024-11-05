@@ -39,7 +39,7 @@ function App() {
               <Route path="/cart" element={<ProtectedRouting> <CartPage /> </ProtectedRouting>}/>
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/admin" element={<ProtectedRouting> <AdminDashboard /></ProtectedRouting>} />
+              <Route path="/admin" element={<ProtectedRouting role={"admin"} > <AdminDashboard /></ProtectedRouting>} />
               <Route path="/offer" element={ <BestOffers /> } />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="*" element={<NotFound />} />

@@ -1,7 +1,8 @@
 import React from 'react'
 
 const Drag = ({ containerRef, children }) => {
-    const handleDragScroll = (e) => {
+    
+       const handleDragScroll = (e) => {
         const slider = containerRef.current
         let scrollLeft, startX, isDown = false;
         // for large scrren mouse drag

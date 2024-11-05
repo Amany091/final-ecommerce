@@ -7,7 +7,7 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import {  useState } from "react";
 import { useGetUserQuery, useLoginMutation } from "../redux/RTK/loginApi";
 import { toast } from "react-toastify";
-import { ToastSuccess } from "../components/ui/Toast";
+import { ToastError, ToastSuccess } from "../components/ui/Toast";
 import { useSelector } from "react-redux";
 
 function LoginPage() {
@@ -30,7 +30,7 @@ function LoginPage() {
       ToastSuccess("User added successfully")      
       navigate('/')
     } catch (error) {
-      console.log(error)
+      ToastError(error.message)
     }
   }
 

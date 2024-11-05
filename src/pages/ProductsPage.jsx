@@ -22,9 +22,10 @@ const ProductsPage = () => {
         maxPrice: selectedPriceRange ? selectedPriceRange[1] : '',
     };
     
-    const { data: products, isSuccess , isLoading} = useGetProductsQuery(queryParams, {
+    const { data: products, isSuccess , isLoading, refetch} = useGetProductsQuery(queryParams, {
         skip: !shouldFetch,
-        refetchOnMountOrArgChange: true
+        refetchOnMountOrArgChange: true,
+        refetchOnFocus: true
     })
 
     const handleFilterClick = () => {
@@ -46,14 +47,14 @@ const ProductsPage = () => {
         // }
     }
     
-    // useEffect(() => {
-    //     setShouldFetch(true)
-    // }, [])
+    useEffect(() => {
+        setShouldFetch(true)
+    }, [])
     
     useEffect(() => {
         // controle of filtering data 
         setShouldFetch(false)
-    },[isSuccess, queryParams])
+    },[isSuccess, searchParams])
 
     return (
         <section>

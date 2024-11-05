@@ -1,13 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { useGetUserQuery } from "../redux/RTK/loginApi";
+import { ToastError } from "../components/ui/Toast";
 
-const ProtectedRouting = ({ children }) => {
-    
-  if (localStorage.getItem("role") != null) {
+const ProtectedRouting = ({ children , role= "user"}) => {
+  const { data: user } = useGetUserQuery();
+  if (user?.role === role) {
     return children;
-  }  else {
-    return <Navigate to="/login" replace={true} />;
+  } else {
+    ToastError("You don't have permission to access this page")
+    // return <Navigate to="/login" replace={true} />;
   }
 };
 

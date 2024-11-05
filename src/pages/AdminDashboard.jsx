@@ -6,9 +6,11 @@ import { AiFillCaretRight } from 'react-icons/ai'
 import { Link, useSearchParams } from 'react-router-dom'
 import Pagination from '../components/componentPages/dashboard/Pagination'
 import { useChangeOrderStatusMutation, useCountOrdersQuery, useDeleteOrderMutation, useGetOrdersQuery } from '../redux/RTK/adminDashboardApi'
+import { useGetUserQuery } from '../redux/RTK/loginApi'
 
 const AdminDashboard = () => {
     // const currentPage = 1;
+    const {data:user} = useGetUserQuery()
     const [limit, setLimit] = useState(5)
     const [searchParams, setSearchParams] = useSearchParams()
     const [shouldFetch, setShouldFetch] = useState(true)
@@ -83,8 +85,8 @@ const AdminDashboard = () => {
         let filterResult = orders?.filter((order) => {
             return (
                 order.status.toLowerCase().includes(orderTerm) ||
-                order.number == orderTerm
-                // order.user.name.includes(orderTerm)
+                order.number == orderTerm ||
+                order.user.name.includes(orderTerm)
             )
         })
 
