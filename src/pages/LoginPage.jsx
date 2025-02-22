@@ -4,9 +4,8 @@ import Input from "../components/ui/Input"
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
-import {  useState } from "react";
-import { useGetUserQuery, useLoginMutation } from "../redux/RTK/loginApi";
-import { toast } from "react-toastify";
+import { useState } from "react";
+import { useLoginMutation } from "../features/RTK/loginApi";
 import { ToastError, ToastSuccess } from "../components/ui/Toast";
 import { useSelector } from "react-redux";
 
@@ -16,18 +15,18 @@ function LoginPage() {
   const { theme } = useSelector((state) => state.theme)
   const navigate = useNavigate();
   const [login, { isLoading, isSuccess, data: user }] = useLoginMutation()
-  
-  
+
+
   const handleClickShowPassword = (e) => {
     setShowPassword(!showPassword)
   }
-  
+
   const handleLogin = async (data) => {
     try {
       const result = await login({ data }).unwrap() // return promise
       const { role } = result.user
       localStorage.setItem('role', role)
-      ToastSuccess("User added successfully")      
+      ToastSuccess("User added successfully")
       navigate('/')
     } catch (error) {
       ToastError(error.message)
@@ -45,7 +44,7 @@ function LoginPage() {
       password: ""
     },
     validationSchema: validationSchema,
-    
+
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async (values) => {
@@ -69,7 +68,7 @@ function LoginPage() {
             <Input type={showPassword ? "text" : "password"} placeholder="Enter Your Password" inputLabel={"Password"} inputLabelId={"password"} styles={"w-[100%]"} change={formik.handleChange} blur={formik.handleBlur} value={formik.values.password} inputName={"password"} />
             <div onClick={handleClickShowPassword}
               className='relative'>
-              {showPassword ? <MdVisibilityOff size={18} style={{ position: 'absolute', right: '5px', bottom: "15px" ,  color: theme === "dark" ? 'black' : 'white' }} /> : <MdVisibility size={18} style={{ position: 'absolute', right: '5px', bottom: "15px",  color: theme === "dark" ? 'black' : 'white'  }} />}
+              {showPassword ? <MdVisibilityOff size={18} style={{ position: 'absolute', right: '5px', bottom: "15px", color: theme === "dark" ? 'black' : 'white' }} /> : <MdVisibility size={18} style={{ position: 'absolute', right: '5px', bottom: "15px", color: theme === "dark" ? 'black' : 'white' }} />}
             </div>
             {formik.touched.password && formik.errors.password ? (
               <div className="text-red-700 font-inter text-[15px]">{formik.errors.password}</div>
@@ -81,7 +80,7 @@ function LoginPage() {
             <button
               onClick={() => navigate("/register")}
               className="cursor-pointer underline decoration-2 text-bold text-[16px] dark:text-black "
-              >Sign Up</button>
+            >Sign Up</button>
           </span>
         </form>
       </div>

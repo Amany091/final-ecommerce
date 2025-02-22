@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { useGetProductsQuery } from "../../../redux/RTK/productsApi";
+import { useGetProductsQuery } from "../../../features/RTK/productsApi";
 
 function RelatedProducts() {
 
@@ -31,7 +31,7 @@ function RelatedProducts() {
   return (
     <div className="container mt-20 md:mb-20 lg:mb-32">
       <div className="grid lg:grid-cols-4 sm:grid-cols-1 gap-8">
-      {shuffledData.slice(0,4).map((card) => (
+        {shuffledData.slice(0, 4).map((card) => (
           <SwiperSlide key={card.id}>
             <Card
               imageSrc={card.imgCover}

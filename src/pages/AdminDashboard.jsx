@@ -5,12 +5,10 @@ import OrderStatusSummary from '../components/componentPages/dashboard/OrderStat
 import { AiFillCaretRight } from 'react-icons/ai'
 import { Link, useSearchParams } from 'react-router-dom'
 import Pagination from '../components/componentPages/dashboard/Pagination'
-import { useChangeOrderStatusMutation, useCountOrdersQuery, useDeleteOrderMutation, useGetOrdersQuery } from '../redux/RTK/adminDashboardApi'
-import { useGetUserQuery } from '../redux/RTK/loginApi'
+import { useChangeOrderStatusMutation, useCountOrdersQuery, useDeleteOrderMutation, useGetOrdersQuery } from '../features/RTK/adminDashboardApi'
 
 const AdminDashboard = () => {
-    // const currentPage = 1;
-    const {data:user} = useGetUserQuery()
+
     const [limit, setLimit] = useState(5)
     const [searchParams, setSearchParams] = useSearchParams()
     const [shouldFetch, setShouldFetch] = useState(true)
@@ -21,7 +19,7 @@ const AdminDashboard = () => {
     let queryParams = { currentPage: Number(currentPage), limit: limit }
 
     const { data: total } = useCountOrdersQuery()
-    const [setStatus, { data , isLoading:loading}] = useChangeOrderStatusMutation()
+    const [setStatus, { data, isLoading: loading }] = useChangeOrderStatusMutation()
     const { data: orders, refetch, isLoading, isSuccess } = useGetOrdersQuery(queryParams, {
         // skip: !shouldFetch,
         refetchOnMountOrArgChange: true,
@@ -37,7 +35,7 @@ const AdminDashboard = () => {
         completed: 0,
         processing: 0,
         canceled: 0,
-        pending:0
+        pending: 0
     })
 
     useEffect(() => {
@@ -61,9 +59,9 @@ const AdminDashboard = () => {
     }, [orders, updatedOrders])
 
     useEffect(() => {
-        if(isSuccess) setUpdatedOrders(orders)
-    },[isSuccess, orders])
-    
+        if (isSuccess) setUpdatedOrders(orders)
+    }, [isSuccess, orders])
+
     const handleChangeOrderStatus = async (id, status) => {
         let newStatus = { status: status }
         const updatedOrder = orders?.map((order) => order.id === id ? { ...order, status: newStatus.status } : order)
@@ -103,7 +101,7 @@ const AdminDashboard = () => {
             await deleteOrder(id).unwrap()
             refetch()
             setUpdatedOrders(newOrders)
-            
+
         } catch (error) {
             console.log("Failed to delete order")
         }

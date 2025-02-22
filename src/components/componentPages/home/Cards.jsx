@@ -1,12 +1,10 @@
 import Card from "../../ui/Card";
-import { useState } from "react";
-import useWindowWidth from "../../../customHooks/useWindowWidth";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
-import { useGetProductsQuery } from "../../../redux/RTK/productsApi";
+import { useGetProductsQuery } from "../../../features/RTK/productsApi";
 import LoaderSpinner from "../../ui/LoaderSpinner";
 
 function Cards() {

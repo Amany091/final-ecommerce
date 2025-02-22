@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useGetUserQuery } from '../redux/RTK/loginApi'
+import { useGetUserQuery } from '../features/RTK/loginApi'
 import defaultImg from "../assets/images/defaultImgProfile.jpg"
 import { CiMail } from 'react-icons/ci'
 
@@ -9,8 +9,8 @@ const ProfilePage = () => {
     const img = user?.profileImg ? user?.profileImg : defaultImg
 
     useEffect(() => {
-        if(isSuccess) refetch()
-    },[])
+        if (isSuccess) refetch()
+    }, [])
 
     return (
         <div className='dark:bg-dark bg-inputBackground p-10'>
@@ -28,7 +28,7 @@ const ProfilePage = () => {
                         </div>
                         <div className='flex gap-10 items-center'>
                             <h3>Phone</h3>
-                            <p className='p-3 rounded-lg flex-1 border-[2px] border-slate-300' >{user?.phone ?? "notexist" }</p>
+                            <p className='p-3 rounded-lg flex-1 border-[2px] border-slate-300' >{user?.phone ?? "notexist"}</p>
                         </div>
 
                     </div>

@@ -1,4 +1,3 @@
-import ImageOne from "../../../assets/images/image-7.png";
 import Card from "../../ui/Card";
 import { useState } from "react";
 import useWindowWidth from "../../../customHooks/useWindowWidth";
@@ -59,7 +58,7 @@ function TopSellingCards({ products }) {
           }
         </div>
       ) : (
-          <Swiper
+        <Swiper
           navigation={false}
           modules={[Navigation]}
           className="mySwiper"

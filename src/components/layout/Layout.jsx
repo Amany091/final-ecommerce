@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const Layout = () => {
   const isUserExist = !!localStorage.getItem("role")
-  const {theme} = useSelector((state) => state.theme)
+  const { theme } = useSelector((state) => state.theme)
 
   useEffect(() => {
     const root = document.getElementById("root")
@@ -21,7 +21,7 @@ const Layout = () => {
       root.style.color = "black"
     }
   }, [theme])
-  
+
   return (
     <>
       {!isUserExist && <SignupTopbar />}

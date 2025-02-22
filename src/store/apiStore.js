@@ -1,14 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { getBrandsApi } from "./RTK/brandsApi";
-import { getProductsApi } from "./RTK/productsApi";
-import { loginApi } from "./RTK/loginApi";
-import { getCategoriesApi } from "./RTK/categoriesApi";
-import { registerApi } from "./RTK/registerApi";
-import { logoutApi } from "./RTK/logoutApi";
-import { ordersApi } from "./RTK/adminDashboardApi";
-import { addToCartApi } from "./RTK/cartApi";
-import themeReducer from "./themeSlice";
+import { getBrandsApi } from "../features/RTK/brandsApi";
+import { getProductsApi } from "../features/RTK/productsApi";
+import { loginApi } from "../features/RTK/loginApi";
+import { getCategoriesApi } from "../features/RTK/categoriesApi";
+import { registerApi } from "../features/RTK/registerApi";
+import { logoutApi } from "../features/RTK/logoutApi";
+import { ordersApi } from "../features/RTK/adminDashboardApi";
+import { addToCartApi } from "../features/RTK/cartApi";
+import themeReducer from "../features/themeSlice";
+import modalReducer from "../features/modalSlice"
 
 export const store = configureStore({
     reducer: {
@@ -20,7 +21,8 @@ export const store = configureStore({
         [logoutApi.reducerPath]: logoutApi.reducer,
         [ordersApi.reducerPath]: ordersApi.reducer,
         [addToCartApi.reducerPath]: addToCartApi.reducer,
-        theme: themeReducer
+        theme: themeReducer,
+        modal: modalReducer
     },
 
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
@@ -34,7 +36,7 @@ export const store = configureStore({
         addToCartApi.middleware
 
     ) // enable caching
-    
+
 })
 
 setupListeners(store.dispatch)

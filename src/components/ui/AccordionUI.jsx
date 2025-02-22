@@ -6,10 +6,10 @@ import { useSelector } from 'react-redux';
 const AccordionUI = ({ title, children }) => {
 
     const { theme } = useSelector((store) => store.theme)
-    
+
     return (
         <Accordion
-            sx={{ boxShadow: 'none', backgroundColor: theme === "dark" ? 'transparent' : "", color: theme === "dark" ? "white" : 'black'}}>
+            sx={{ boxShadow: 'none', backgroundColor: theme === "dark" ? 'transparent' : "", color: theme === "dark" ? "white" : 'black' }}>
             <AccordionSummary
                 expandIcon={<ArrowDropDownIcon className='dark:text-white' />}
                 aria-controls="panel1a-content"

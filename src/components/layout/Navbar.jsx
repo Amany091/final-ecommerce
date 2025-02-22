@@ -10,14 +10,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import Button from "../ui/Button";
 import { LuLogIn } from "react-icons/lu";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useGetUserQuery, useLoginMutation } from "../../redux/RTK/loginApi";
-import { useCountOrdersQuery } from "../../redux/RTK/adminDashboardApi";
-import { useLogoutMutation } from "../../redux/RTK/logoutApi";
+import { useCountOrdersQuery } from "../../features/RTK/adminDashboardApi";
+import { useLogoutMutation } from "../../features/RTK/logoutApi";
 import { ToastSuccess } from "../ui/Toast";
 import { FaRegMoon } from "react-icons/fa6";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { setTheme, toggleTheme } from "../../redux/themeSlice";
+import { setTheme, toggleTheme } from "../../features/themeSlice";
 
 
 function Navbar() {
@@ -34,10 +33,10 @@ function Navbar() {
   const { theme } = useSelector((state) => state.theme)
   const dispatch = useDispatch()
 
-  const role = localStorage.getItem("role") 
+  const role = localStorage.getItem("role")
   const { data: total } = useCountOrdersQuery()
   const [logout] = useLogoutMutation()
-  
+
   const handleDropdown = () => {
     setDropdownStatus((prev) => !prev);
   };
@@ -120,7 +119,7 @@ function Navbar() {
           </li>
           <li><NavLink to="/products">Products</NavLink></li>
           <li><NavLink to="/offer">Best Offers</NavLink></li>
-          {role == "admin" && <li><NavLink to="/admin">Dasboard</NavLink></li> }
+          {role == "admin" && <li><NavLink to="/admin">Dasboard</NavLink></li>}
           {/* <li><NavLink to="/">Brands</NavLink></li> */}
         </ul>
         {/* End Links */}
@@ -150,12 +149,12 @@ function Navbar() {
                 <li className="px-2 py-2  hover:bg-headerBackground duration-300 dark:text-black "><Link to="/profile">Account</Link></li>
                 <li className="px-2 py-2  hover:bg-headerBackground duration-300 dark:text-black"><Link to="/orders">Orders</Link></li>
                 <li className="px-2 py-2  hover:bg-headerBackground duration-300 border-b border-headerBackground dark:text-black"><Link to="/">Address</Link></li>
-                <li className="px-2 py-2 hover:bg-headerBackground duration-300 text-discountColor" onClick={()=> handleLogout()} >logout</li>
+                <li className="px-2 py-2 hover:bg-headerBackground duration-300 text-discountColor" onClick={() => handleLogout()} >logout</li>
               </ul>
             </span> :
               <span >
                 {
-                  <LuLogIn className="lg:hidden text-[22px] cursor-pointer" onClick={()=> navigate("/login")} />
+                  <LuLogIn className="lg:hidden text-[22px] cursor-pointer" onClick={() => navigate("/login")} />
                 }
                 <Button click={() => navigate("/login")} children={"Login"} className="py-[10px] px-[40px] hidden lg:block" />
               </span>
@@ -163,7 +162,7 @@ function Navbar() {
           {theme === "light" ?
             <FaRegMoon onClick={() => dispatch(toggleTheme())} className="dark:text-white" />
             :
-            <MdOutlineWbSunny onClick={() => dispatch(toggleTheme())} className="dark:text-white"  />}
+            <MdOutlineWbSunny onClick={() => dispatch(toggleTheme())} className="dark:text-white" />}
         </div>
         {/* End Icons */}
 
@@ -198,7 +197,7 @@ function Navbar() {
             transition={{ duration: 0.5 }}
             className="absolute top-0 left-0 w-72 bg-white dark:bg-dark py-3 px-5 h-full z-50 shadow-lg">
             <div ref={drawerRef}>
-              <Drawer  onClose={() => setDrawerOpen(false)} />
+              <Drawer onClose={() => setDrawerOpen(false)} />
             </div>
           </motion.div>
         )}

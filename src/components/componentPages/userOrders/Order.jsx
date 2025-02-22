@@ -2,7 +2,6 @@ import React from 'react'
 
 const Order = ({ orders, status }) => {
     const ords = orders?.filter((order) => order.status.toLowerCase() == status) ?? []
-    console.log(ords, status)
 
     return (
         <div>

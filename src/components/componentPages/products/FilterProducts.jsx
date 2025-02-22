@@ -1,24 +1,47 @@
-import React, {  useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PriceSlider from './PriceSlider'
 import AccordionUI from '../../ui/AccordionUI'
 import Color from '../../ui/Color'
 import MainSize from '../../ui/MainSize'
-import { useGetCategoriesQuery} from '../../../redux/RTK/categoriesApi'
+import { useGetCategoriesQuery } from '../../../features/RTK/categoriesApi'
 import { useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 
-const FilterProducts = ({ ... props}) => {
-    const {className, onFilterClick , setSelectedCategory, selectedCategory, setSelectedColor, selectedColor, setSelectedSize, selectedSize, selectedPriceRange, setSelectedPriceRange} = props
+const FilterProducts = (props) => {
+    const { className, selectedCategory, selectedColor, selectedPriceRange, selectedSize, setSelectedCategory, setSelectedColor, setSelectedPriceRange, setSelectedSize } = props
     const { data: categories } = useGetCategoriesQuery();
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [shouldFetch, setShouldFetch] = useState(false)
+
+    const handleFilterClick = () => {
+        setShouldFetch(false)
+        const queryParams = {}
+        if (selectedSize) queryParams.size = selectedSize;
+        if (selectedColor) queryParams.color = selectedColor;
+        if (selectedCategory) queryParams.category = selectedCategory;
+        if (selectedPriceRange) {
+            queryParams.minPrice = selectedPriceRange[0];
+            queryParams.maxPrice = selectedPriceRange[1];
+        }
+
+        // Update the URL with the selected filters using setSearchParams
+        setSearchParams(queryParams)
+    }
+    useEffect(() => {
+        if (shouldFetch) {
+            handleFilterClick()
+        }
+    }, [shouldFetch])
 
     const handleCategoryClick = (id) => {
         if (id === selectedCategory) {
-           setSelectedCategory(null)
+            setSelectedCategory(null)
         } else {
             setSelectedCategory(id)
         }
     };
 
-    const {theme} = useSelector((store)=> store.theme)
+    const { theme } = useSelector((store) => store.theme)
 
     return (
         <div className={`${className} rounded-cardRadius border border-slate-400/30 p-6 h-fit mb-8 `}>
@@ -33,16 +56,14 @@ const FilterProducts = ({ ... props}) => {
             <hr className='text-slate-400/30 my-6' />
             <div>
                 {
-                    categories?.map((category, index) => {
-                        return (
-                            <>
-                                <div key={`${category._id}`} className={`flex justify-between py-3 font-semibold text-xl px-4 cursor-pointer ${theme === "dark" ? 'hover:text-black' : ''} hover:bg-[#f0eeed] rounded-md ${selectedCategory === category._id && "bg-[#f0eeed] rounded-md"}`}
-                                    onClick={() => handleCategoryClick(category._id)}>
-                                    <p>{category.name}</p>
-                                </div>
-                            </>
-                        )
-                    })
+                    categories?.map((category, index) => (
+                        <div
+                            key={`${category._id}-${index}`}
+                            className={`flex justify-between py-3 font-semibold text-xl px-4 cursor-pointer ${theme === "dark" ? 'hover:text-black' : ''} hover:bg-[#f0eeed] rounded-md ${selectedCategory === category._id && "bg-[#f0eeed] rounded-md"}`}
+                            onClick={() => handleCategoryClick(category._id)}>
+                            <p>{category.name}</p>
+                        </div>
+                    ))
                 }
             </div>
             {/* price slider value */}
@@ -66,9 +87,9 @@ const FilterProducts = ({ ... props}) => {
                     setSelectedSize={setSelectedSize}
                 />
             </AccordionUI>
-           
+
             <button className={'p-buttonPadding bg-black border-[2px] border-buttonBackground hover:bg-transparent hover:text-inherit hover:border-[2px] hover:border-gray-300  text-white rounded-buttonRadius duration-200 font-inter w-full my-5'}
-                onClick={onFilterClick}>Apply Filter</button>
+                onClick={() => setShouldFetch(true)}>Apply Filter</button>
         </div >
     )
 }
