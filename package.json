@@ -21,6 +21,7 @@
     "@mui/styled-engine-sc": "^6.1.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@tailwindcss/forms": "^0.5.9",
+    "authentication-and-authorization": "file:../final-ecommerce-backend",
     "axios": "^1.7.7",
     "babel-loader": "^9.2.1",
     "formik": "^2.4.6",
