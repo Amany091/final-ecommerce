@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetCategoryMutation } from "../features/RTK/categoriesApi";
 import { useGetProductsQuery } from "../features/RTK/productsApi";
-import CurrentPath from "../components/ui/CurrentPath";
 import Card from "../components/ui/Card";
 import LoaderSpinner from "../components/ui/LoaderSpinner";
+import BreadCrumb from "../components/ui/BreadCrumb";
 
 function CategoryPage() {
   const { id } = useParams();
@@ -18,7 +18,7 @@ function CategoryPage() {
 
   return (
     <div className=" container mb-40">
-      <CurrentPath currentPath={[cat?.name]} />
+      <BreadCrumb />
       <h1 className="mt-10 text-[28px] font-semibold">{cat?.name}</h1>
       {isLoading ? <LoaderSpinner /> :
         <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 gap-7 mt-5 ">

@@ -4,6 +4,7 @@ import OrderSummary from '../components/componentPages/cart/OrderSummary';
 import { Link } from 'react-router-dom';
 import { AiFillCaretRight } from "react-icons/ai";
 import { useCountOrdersQuery } from '../features/RTK/adminDashboardApi';
+import BreadCrumb from '../components/ui/BreadCrumb';
 
 const CartPage = () => {
   const { data: total, } = useCountOrdersQuery();
@@ -11,6 +12,7 @@ const CartPage = () => {
 
   return (
     <div className="container pb-20">
+      <BreadCrumb />
       <nav className="mb-5 flex mt-4 space-x-4 items-center">
         <Link to="/" className="text-gray-500 ">Home</Link>
         <AiFillCaretRight className='flex' />

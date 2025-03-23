@@ -1,13 +1,13 @@
 import React from 'react'
-import CurrentPath from '../components/ui/CurrentPath'
 import AllProducts from '../components/componentPages/products/AllProducts'
+import BreadCrumb from '../components/ui/BreadCrumb'
 
 const ProductsPage = () => {
 
     return (
         <section>
             <div className="container">
-                <CurrentPath currentPath={['products']} />
+                <BreadCrumb />
                 <AllProducts />
             </div>
         </section>

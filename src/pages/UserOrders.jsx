@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import CurrentPath from '../components/ui/CurrentPath'
 import OrderSummary from '../components/componentPages/cart/OrderSummary'
 import DashboardSidebar from "../components/componentPages/dashboard/DashboardSidebar"
 import { useGetOrdersQuery } from '../features/RTK/adminDashboardApi'
 import OrderStatus from '../components/componentPages/userOrders/OrderStatus'
 import OrdersList from '../components/componentPages/userOrders/OrdersList'
+import BreadCrumb from '../components/ui/BreadCrumb'
 
 const UserOrders = () => {
     const [status, setStatus] = useState("pending")
@@ -15,9 +15,7 @@ const UserOrders = () => {
 
     return (
         <div className="container font-inter mb-32">
-            <nav>
-                <CurrentPath currentPath={["orders"]} />
-            </nav>
+            <BreadCrumb />
             <div className="grid lg:grid-cols-[295px,.9fr] md:grid-cols-[295px,.9fr] sm:grid-cols-1 gap-5 ">
                 <DashboardSidebar />
                 <div>

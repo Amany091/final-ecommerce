@@ -26,47 +26,36 @@ const HomePage = () => {
   }
 
   return (
-    <>
-      <section className=" bg-headerBackground dark:bg-dark px-5">
-        <div className="container">
-          <header className="grid lg:grid-cols-2 grid-cols-1 gap-10 pt-5">
-            {/* left side */}
-            <div className="flex flex-col gap-3  justify-center">
-              <h1 className="font-cairo font-bold mt-10 text-4xl w-[315px] md:w-[500px]">
-                FIND CLOTHES THAT MATCHES YOUR STYLE
-              </h1>
-              <p className="text-descriptionColor md:w-auto sm:w-[358px] dark:text-slate-300 font-inter">
-                Browse through our diverse range of meticulously crafted garments,
-                designed to bring out your individuality and cater to your sense
-                of style.
-              </p>
-              <Button className="lg:w-[210px] w-full mt-5">shop now</Button>
-              <ShopRate />
-            </div>
-            {/* right side */}
-            <HeaderImage />
-          </header>
-        </div>
-        {/* brands section */}
-        <Brands />
-      </section >
-      {/* arrivals section */}
-      <section >
-        <NewArrivals products={products} />
-      </section >
+    <section className=" ">
+      <div className="container bg-headerBackground dark:bg-dark px-5">
+        <header className="grid lg:grid-cols-2 grid-cols-1 gap-10 pt-5">
+          {/* left side */}
+          <div className="flex flex-col gap-3  justify-center">
+            <h1 className="font-cairo font-bold mt-10 text-4xl w-[315px] md:w-[500px]">
+              FIND CLOTHES THAT MATCHES YOUR STYLE
+            </h1>
+            <p className="text-descriptionColor md:w-auto sm:w-[358px] dark:text-slate-300 font-inter">
+              Browse through our diverse range of meticulously crafted garments,
+              designed to bring out your individuality and cater to your sense
+              of style.
+            </p>
+            <Button className="lg:w-[210px] w-full mt-5">shop now</Button>
+            <ShopRate />
+          </div>
+          {/* right side */}
+          <HeaderImage />
+        </header>
+      </div>
+      {/* brands section */}
+      <Brands />
 
-      {/* Top Selling section */}
-      <section className="mt-10">
-        <TopSellingCards products={products} />
-      </section >
+      <NewArrivals products={products} />
 
-      {/* Category section */}
-      <section>
-        <Category />
-      </section >
+      <TopSellingCards products={products} />
 
-      {/* customer reviews section */}
-      <section className="overflow-hidden mb-20 lg:mb-40" >
+      <Category />
+
+      <div className="overflow-hidden mb-20 lg:mb-40">
         <div className="container">
           <div className="flex justify-between px-2 items-center">
             <Title title="Our happy customers" />
@@ -77,8 +66,8 @@ const HomePage = () => {
           </div>
         </div>
         <CustomerReviews containerRef={containerRef} />
-      </section >
-    </>
+      </div>
+    </section >
   );
 };
 
